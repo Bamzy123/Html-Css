@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - BamsyFx</title>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="Bamsyfx.html"><h1>BamsyFx</h1></a>
+                </div>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <!-- <ul class="nav-menu">
+                    <li><a href="Bamsyfx.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul> -->
+                <div class="nav-buttons">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="auth-section">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>Create Your Account</h2>
+                <p>Join thousands of successful traders on BamsyFx</p>
+            </div>
+            <form class="auth-form" id="signupForm">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <div class="password-requirements">
+                        Password must contain:
+                        <ul>
+                            <li>At least 8 characters</li>
+                            <li>At least one uppercase letter</li>
+                            <li>At least one number</li>
+                            <li>At least one special character</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I also agree to receive trading tips and marketing emails.</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <div class="auth-divider">
+                <span>OR</span>
+            </div>
+            <div class="social-signup">
+                <button class="social-btn">
+                    <img src="/placeholder.svg?height=20&width=20" alt="Google">
+                    <span>Sign up with Google</span>
+                </button>
+                <button class="social-btn">
+                    <img src="/placeholder.svg?height=20&width=20" alt="Apple">
+                    <span>Sign up with Apple</span>
+                </button>
+            </div>
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html">Log in</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 BamsyFx. All rights reserved.</p>
+            <p>Trading involves risk. Only risk capital you're prepared to lose.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    
+                    // Animate hamburger to X
+                    const spans = menuToggle.querySelectorAll('span');
+                    spans.forEach(span => span.classList.toggle('active'));
+                    
+                    if (navMenu.classList.contains('active')) {
+                        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        spans[1].style.opacity = '0';
+                        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                    } else {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    }
+                });
+            }
+
+            // Form Validation
+            const signupForm = document.getElementById('signupForm');
+            
+            if (signupForm) {
+                signupForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Basic form validation
+                    let isValid = true;
+                    const fullname = document.getElementById('fullname');
+                    const email = document.getElementById('email');
+                    const password = document.getElementById('password');
+                    const confirmPassword = document.getElementById('confirmPassword');
+                    const terms = document.getElementById('terms');
+                    
+                    // Validate full name
+                    if (!fullname.value.trim()) {
+                        isValid = false;
+                        fullname.style.borderColor = '#ef4444';
+                    } else {
+                        fullname.style.borderColor = '';
+                    }
+                    
+                    // Validate email
+                    if (!email.value.trim()) {
+                        isValid = false;
+                        email.style.borderColor = '#ef4444';
+                    } else {
+                        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailPattern.test(email.value)) {
+                            isValid = false;
+                            email.style.borderColor = '#ef4444';
+                        } else {
+                            email.style.borderColor = '';
+                        }
+                    }
+                    
+                    // Validate password
+                    if (!password.value) {
+                        isValid = false;
+                        password.style.borderColor = '#ef4444';
+                    } else {
+                        // Check password strength
+                        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                        if (!passwordPattern.test(password.value)) {
+                            isValid = false;
+                            password.style.borderColor = '#ef4444';
+                        } else {
+                            password.style.borderColor = '';
+                        }
+                    }
+                    
+                    // Validate confirm password
+                    if (!confirmPassword.value || confirmPassword.value !== password.value) {
+                        isValid = false;
+                        confirmPassword.style.borderColor = '#ef4444';
+                    } else {
+                        confirmPassword.style.borderColor = '';
+                    }
+                    
+                    // Validate terms checkbox
+                    if (!terms.checked) {
+                        isValid = false;
+                        terms.style.outline = '2px solid #ef4444';
+                    } else {
+                        terms.style.outline = 'none';
+                    }
+                    
+                    if (isValid) {
+                        // In a real application, you would send the form data to a server
+                        alert('Account created successfully! Redirecting to login...');
+                        // Redirect to login page
+                        // window.location.href = 'login.html';
+                    } else {
+                        alert('Please fill in all required fields correctly.');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
